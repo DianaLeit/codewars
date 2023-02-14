@@ -54,22 +54,35 @@ const MORSE_CODE = {
   "--..": "Z",
   "..--.-": "_",
   "...---...": "SOS",
+  "": " ",
 };
 /**
  * @param {string} morseCode input
  */
 decodeMorse = function (morseCode) {
-  let cutMorse = morseCode.trim().split(" ");
-  let transMorse = cutMorse.map(translate);
-  return transMorse.join("");
+  let cutMorse = morseCode.trim().split("   "); // array of words
+  let phrase = cutMorse.map(breakWord); // array of broken words, where each word is array of letters in morse
+
+  let transMorse = phrase.map(translateWord);
+
+  return transMorse.join(" ");
 };
 /**
- * @param {string} letter
+ * @param {string} word
+ * @returns {string[]}
  */
+function breakWord(word) {
+  return word.split(" ");
+}
+/**
+ * @param {string[]} word
+ */
+function translateWord(word) {
+  return word.map(translate).join("");
+}
 function translate(letter) {
   return MORSE_CODE[letter];
 }
-
 const { assert } = require("chai");
 
 describe("Sample tests", function () {
