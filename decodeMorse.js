@@ -61,28 +61,17 @@ const MORSE_CODE = {
  */
 decodeMorse = function (morseCode) {
   let cutMorse = morseCode.trim().split("   "); // array of words
-  let phrase = cutMorse.map(breakWord); // array of broken words, where each word is array of letters in morse
-
-  let transMorse = phrase.map(translateWord);
-
+  let transMorse = cutMorse.map(translateWord);
   return transMorse.join(" ");
 };
+
 /**
  * @param {string} word
- * @returns {string[]}
- */
-function breakWord(word) {
-  return word.split(" ");
-}
-/**
- * @param {string[]} word
  */
 function translateWord(word) {
-  return word.map(translate).join("");
+  return word.split(" ").map((letter) => MORSE_CODE[letter]).join("");
 }
-function translate(letter) {
-  return MORSE_CODE[letter];
-}
+
 const { assert } = require("chai");
 
 describe("Sample tests", function () {
