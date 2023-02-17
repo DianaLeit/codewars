@@ -1,20 +1,36 @@
-var fibsFizzBuzz = function (n) {
+/*The goal of this kata is two-fold:
+
+1.) You must produce a fibonacci sequence in the form of an array, containing 
+a number of items equal to the input provided.
+
+2.) You must replace all numbers in the sequence divisible by 3 with Fizz, 
+those divisible by 5 with Buzz, and those divisible by both 3 and 5 with FizzBuzz.
+
+For the sake of this kata, you can assume all input will be a positive integer.
+
+Use Cases
+Return output must be in the form of an array, with the numbers as integers and 
+the replaced numbers (fizzbuzz) as strings. */
+
+function fibsFizzBuzz(n) {
   let fib = [1, 1];
   for (let i = 2; i < n; i++) {
     fib[i] = fib[i - 2] + fib[i - 1];
   }
-  const fizzbuzz = fib.map(putFizzBuzz);
-  return fizzbuzz;
-  
-};
+  return fib.map(putFizzBuzz);
+}
+
 function putFizzBuzz(value) {
-  if (value % 3 == 0 && value % 5 == 0) {
-    return (value = "FizzBuzz");
-  } else if (value % 3 == 0) {
-    return (value = "Fizz");
-  } else if (value % 5 == 0) {
-    return (value = "Buzz");
-  } else return value;
+  if (value % 15 == 0) {
+    return "FizzBuzz";
+  }
+  if (value % 3 == 0) {
+    return "Fizz";
+  }
+  if (value % 5 == 0) {
+    return "Buzz";
+  }
+  return value;
 }
 //
 //
